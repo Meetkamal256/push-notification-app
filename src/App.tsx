@@ -4,19 +4,13 @@ import styles from "./app.module.css";
 
 const App: React.FC = () => {
   useEffect(() => {
-    if (!(window as any).OneSignalInitialized) {
-      OneSignal.init({ appId: import.meta.env.VITE_ONESIGNAL_APP_ID }).then(
-        () => {
-          setTimeout(() => {
-            OneSignal.showSlidedownPrompt();
-          }, 5000);
-        }
-      );
-      (window as any).OneSignalInitialized = true;
-    }
+    OneSignal.init({ appId: import.meta.env.VITE_ONESIGNAL_APP_ID }).then(
+      () => {
+        console.log("OneSignal initialized");
+      }
+    );
   }, []);
-  
-  // Function to send push notification
+
   const sendNotification = async (message: string) => {
     try {
       const response = await fetch(
@@ -25,13 +19,11 @@ const App: React.FC = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Basic ${
-              import.meta.env.VITE_ONESIGNAL_REST_API_KEY
-            }`,
+            Authorization: `Basic ${import.meta.env.VITE_ONESIGNAL_API_KEY}`,
           },
           body: JSON.stringify({
             app_id: import.meta.env.VITE_ONESIGNAL_APP_ID,
-            included_segments: ["All"], // Send to all subscribers
+            included_segments: ["All"],
             headings: { en: "New Notification" },
             contents: { en: message },
           }),
