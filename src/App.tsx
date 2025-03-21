@@ -15,7 +15,7 @@ const App: React.FC = () => {
           body: JSON.stringify({
             app_id: import.meta.env.VITE_ONESIGNAL_APP_ID,
             included_segments: ["All"],
-            headings: { en: "New Notification" },
+            headings: { en: "Hello!" },
             contents: { en: message },
           }),
         }
@@ -33,18 +33,16 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1>🚀 OneSignal Push Notifications</h1>
-      <div className={styles.btnContainer}>
-        <button onClick={() => sendNotification("New React update available!")}>
-          React
+      <header className={styles.heroSection}>
+        <h1>📢 Stay Updated!</h1>
+        <p>Receive instant notifications about our latest updates.</p>
+        <button
+          onClick={() => sendNotification("🚀 Welcome to our app!")}
+          className={styles.notifyButton}
+        >
+          Send Notification
         </button>
-        <button onClick={() => sendNotification("Angular 17 is live!")}>
-          Angular
-        </button>
-        <button onClick={() => sendNotification("Vue 3 has new features!")}>
-          Vue
-        </button>
-      </div>
+      </header>
     </div>
   );
 };
