@@ -1,16 +1,7 @@
-import React, { useEffect } from "react";
-import OneSignal from "react-onesignal";
+import React from "react";
 import styles from "./app.module.css";
 
 const App: React.FC = () => {
-  useEffect(() => {
-    OneSignal.init({ appId: import.meta.env.VITE_ONESIGNAL_APP_ID }).then(
-      () => {
-        console.log("OneSignal initialized");
-      }
-    );
-  }, []);
-
   const sendNotification = async (message: string) => {
     try {
       const response = await fetch(
@@ -29,17 +20,17 @@ const App: React.FC = () => {
           }),
         }
       );
-      
+
       if (!response.ok) {
         throw new Error("Failed to send notification");
       }
-      
-      console.log("Notification sent successfully");
+
+      console.log("✅ Notification sent successfully");
     } catch (error) {
-      console.error("Error sending notification:", error);
+      console.error("❌ Error sending notification:", error);
     }
   };
-  
+
   return (
     <div className={styles.container}>
       <h1>🚀 OneSignal Push Notifications</h1>
