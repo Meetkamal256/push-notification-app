@@ -1,49 +1,15 @@
-import React from "react";
-import styles from "./app.module.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import OneSignalPushNotification from "./oneSignalPushNotification/OneSignalPushNotification";
+import HtmlPushNotifications from "./htmlPushNotification/HtmlPushNotifications";
 
-const App: React.FC = () => {
-  const sendNotification = async (message: string) => {
-    try {
-      const response = await fetch(
-        "https://onesignal.com/api/v1/notifications",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Basic ${import.meta.env.VITE_ONESIGNAL_API_KEY}`,
-          },
-          body: JSON.stringify({
-            app_id: import.meta.env.VITE_ONESIGNAL_APP_ID,
-            included_segments: ["All"],
-            headings: { en: "Hello!" },
-            contents: { en: message },
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to send notification");
-      }
-
-      console.log("✅ Notification sent successfully");
-    } catch (error) {
-      console.error("❌ Error sending notification:", error);
-    }
-  };
-
+const App = () => {
   return (
-    <div className={styles.container}>
-      <header className={styles.heroSection}>
-        <h1>📢 Stay Updated!</h1>
-        <p>Receive instant notifications about our latest updates.</p>
-        <button
-          onClick={() => sendNotification("🚀 Welcome to our app!")}
-          className={styles.notifyButton}
-        >
-          Send Notification
-        </button>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<OneSignalPushNotification />} />
+        <Route path="/html-push" element={<HtmlPushNotifications />} />
+      </Routes>
+    </Router>
   );
 };
 
