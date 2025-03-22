@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  flex-direction: column;
+  gap: 40px;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -47,4 +49,22 @@ p {
 
 .notifyButton:hover {
   background: #4338ca;
+}
+
+.linkButton {
+  display: inline-block;
+  background: #10b981;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none; 
+  text-align: center;
+  transition: background 0.3s ease;
+  outline: none;
+
+}
+
+.linkButton:hover {
+  background: #059669;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./htmlPushNotifications.module.css";
+import { Link } from "react-router";
 
 const HtmlPushNotifications: React.FC = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -80,20 +81,20 @@ const HtmlPushNotifications: React.FC = () => {
           Allow push notifications, and we'll keep you informed even when you're
           not actively browsing.
         </p>
-        
+
         {!isPermissionGranted && (
           <button className={styles.notifyButton} onClick={requestPermission}>
             Enable Push Notifications
           </button>
         )}
-        
+
         {isPermissionGranted && !isSubscribed && (
           <p>
             We’re setting up your notifications. You’ll be ready to receive
             real-time alerts shortly.
           </p>
         )}
-        
+
         {isPermissionGranted && isSubscribed && (
           <>
             <button className={styles.notifyButton} onClick={sendNotification}>
@@ -105,11 +106,16 @@ const HtmlPushNotifications: React.FC = () => {
             </p>
           </>
         )}
-        
+
         {!serviceWorkerRegistered && (
           <p>Registering Service Worker... Please wait...</p>
         )}
       </header>
+      <button>
+        <Link to="/" className={styles.linkButton}>
+          Navigate to oneSignal push Notification Demo
+        </Link>
+      </button>
     </div>
   );
 };
